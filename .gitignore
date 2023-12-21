@@ -1,0 +1,15 @@
+# package directories
+node_modules
+jspm_packages
+
+# Serverless directories
+.serverless
+#pycharm directory
+.idea
+
+# test
+
+mocks/AirtableMock.js
+test/liveiq.test.js
+test/getSecret.test.js
+test/liveIQBrowsing.test.js

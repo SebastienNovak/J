@@ -1,0 +1,41 @@
+service: aws-lambda
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  stage: prod
+  region: ca-central-1
+  profile: default
+  runtime: nodejs14.x
+
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "S3:putObject"
+        - "S3:readObject"
+      Resource:
+        - "arn:aws:s3:::liveiq-employees/*"
+functions:
+  liveiq-automation:
+    handler: src/liveiq.getEmployees
+    memorySize: 3008
+    timeout: 240
+    url:
+      authorizer: 'aws_iam'
+  liveiq-import:
+    handler: src/liveiq.putEmployees
+    memorySize: 3008
+    timeout: 240
+    url:
+      authorizer: 'aws_iam'
+  getReporting:
+    handler: src/liveiq.getReporting
+    memorySize: 3008
+    timeout: 240
+    url:
+      authorizer: 'aws_iam'
+# you can add CloudFormation resource templates here
+#  Outputs:
+#     NewOutput:
+#       Description: "Description for the output"
+#       Value: "Some output value"

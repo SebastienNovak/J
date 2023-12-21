@@ -1,4 +1,13 @@
 'use strict';
+const express = require('express');
+const LiveIQController = require('./src/controllers/liveiqController');
+const app = express();
+
+app.use(express.json());
+
+app.get('/employees', LiveIQController.getEmployees);
+app.post('/employees', LiveIQController.putEmployees);
+app.get('/reporting', LiveIQController.getReporting);
 
 module.exports.hello = async (event) => {
   return {
